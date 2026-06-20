@@ -2,6 +2,10 @@
 
 Notes App submission built with HTML, CSS Grid, JavaScript modules, and native Web Components.
 
+## Live Demo
+
+[https://belajar-fundamental-frontend-web.netlify.app](https://belajar-fundamental-frontend-web.netlify.app)
+
 ## Features
 
 - Displays all Dicoding sample notes.
