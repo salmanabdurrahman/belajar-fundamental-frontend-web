@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A simple Notes App for displaying and adding notes."
+    />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <script type="module" src="./src/app.js"></script>
+  </head>
+  <body>
+    <app-bar></app-bar>
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Personal notes</p>
+        <h1 id="hero-title">Keep short thoughts in one calm place.</h1>
+        <p class="hero__copy">
+          Write ideas, plans, and daily reminders. Sample notes render instantly,
+          and new notes appear without reloading.
+        </p>
+      </section>
+      <section class="workspace" aria-label="Notes workspace">
+        <note-form></note-form>
+        <section class="notes-section" aria-labelledby="notes-heading">
+          <div class="section-heading">
+            <h2 id="notes-heading">Notes List</h2>
+          </div>
+          <note-list></note-list>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
