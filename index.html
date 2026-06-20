@@ -5,30 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="A simple Notes App for displaying and adding notes."
+      content="A Notes App powered by Dicoding Notes API."
     />
     <title>Notes App</title>
-    <link rel="stylesheet" href="./styles/main.css" />
-    <script type="module" src="./src/app.js"></script>
   </head>
   <body>
     <app-bar></app-bar>
+    <toast-message hidden></toast-message>
     <main class="page-shell">
-      <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">Personal notes</p>
+      <section class="hero" aria-labelledby="hero-title" data-aos="fade-up">
         <h1 id="hero-title">Keep short thoughts in one calm place.</h1>
         <p class="hero__copy">
-          Write ideas, plans, and daily reminders. Sample notes render instantly,
-          and new notes appear without reloading.
+          Write ideas, plans, and daily reminders. Notes sync through the
+          Dicoding REST API with loading, archive, and delete actions.
         </p>
       </section>
+
       <section class="workspace" aria-label="Notes workspace">
-        <note-form></note-form>
-        <section class="notes-section" aria-labelledby="notes-heading">
+        <note-form data-aos="fade-up"></note-form>
+        <section
+          class="notes-section"
+          aria-labelledby="notes-heading"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           <div class="section-heading">
-            <h2 id="notes-heading">Notes List</h2>
+            <div>
+              <h2 id="notes-heading">Notes List</h2>
+            </div>
+            <loading-indicator></loading-indicator>
           </div>
-          <note-list></note-list>
+
+          <note-list
+            id="active-notes"
+            empty-title="No active notes yet."
+          ></note-list>
+
+          <div class="section-heading section-heading--archived">
+            <div>
+              <h2>Archived Notes</h2>
+            </div>
+          </div>
+          <note-list
+            id="archived-notes"
+            archived
+            empty-title="No archived notes yet."
+            empty-copy="Archive notes to see them here."
+          ></note-list>
         </section>
       </section>
     </main>

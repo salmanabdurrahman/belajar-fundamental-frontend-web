@@ -1,6 +1,6 @@
-# Notes App
+# Notes App v2
 
-Notes App submission built with HTML, CSS Grid, JavaScript modules, and native Web Components.
+Notes App submission built with Webpack, Fetch API, CSS Grid, and native Web Components.
 
 ## Live Demo
 
@@ -8,19 +8,26 @@ Notes App submission built with HTML, CSS Grid, JavaScript modules, and native W
 
 ## Features
 
-- Displays all Dicoding sample notes.
-- Add-note form with realtime validation.
-- Notes persist in browser localStorage.
-- CSS Grid for the notes list.
-- Web Components: `app-bar`, `note-form`, `note-list`, `note-item`, `empty-state`.
-- Responsive layout inspired by the Cursor design system.
+- Fetches active and archived notes from Dicoding Notes API.
+- Adds, archives, restores, and deletes notes through REST endpoints.
+- Loading indicator for API requests.
+- Toast feedback for success and error states.
+- AOS-powered scroll animation with reduced-motion support.
+- CSS Grid notes layout.
+- Web Components: `app-bar`, `note-form`, `note-list`, `note-item`, `empty-state`, `loading-indicator`, `toast-message`.
+- Cursor-inspired warm cream design system.
 
 ## Run
 
-Open `index.html` directly in a browser, or use a static server:
-
 ```bash
-python3 -m http.server 8080
+pnpm install
+pnpm run start-dev
 ```
 
-Then open `http://localhost:8080`.
+## Build
+
+```bash
+pnpm run build
+```
+
+Build output is generated in `dist/`. Production CSS is extracted into `dist/assets/css/`.

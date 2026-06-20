@@ -1,6 +1,6 @@
 class NoteItem extends HTMLElement {
   static get observedAttributes() {
-    return ["title", "body", "created-at"];
+    return ["note-id", "title", "body", "created-at", "archived"];
   }
 
   connectedCallback() {
@@ -29,8 +29,43 @@ class NoteItem extends HTMLElement {
     body.className = "note-card__body";
     body.textContent = this.getAttribute("body") || "";
 
-    article.append(meta, title, body);
+    const actions = document.createElement("div");
+    actions.className = "note-card__actions";
+
+    const archiveButton = document.createElement("button");
+    archiveButton.type = "button";
+    archiveButton.className = "button-secondary";
+    archiveButton.textContent = this.isArchived ? "Unarchive" : "Archive";
+    archiveButton.addEventListener("click", () => {
+      this.dispatchNoteEvent(
+        this.isArchived ? "note:unarchive" : "note:archive"
+      );
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "button-danger";
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () =>
+      this.dispatchNoteEvent("note:delete")
+    );
+
+    actions.append(archiveButton, deleteButton);
+    article.append(meta, title, body, actions);
     this.append(article);
+  }
+
+  get isArchived() {
+    return this.hasAttribute("archived");
+  }
+
+  dispatchNoteEvent(name) {
+    this.dispatchEvent(
+      new CustomEvent(name, {
+        bubbles: true,
+        detail: { id: this.getAttribute("note-id") },
+      })
+    );
   }
 
   formatDate(value) {

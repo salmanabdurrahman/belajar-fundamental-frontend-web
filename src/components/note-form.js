@@ -4,6 +4,16 @@ const rules = {
 };
 
 class NoteForm extends HTMLElement {
+  set busy(value) {
+    this._busy = Boolean(value);
+    if (this.submitButton)
+      this.submitButton.disabled = this._busy || !this.validate(false);
+  }
+
+  get busy() {
+    return Boolean(this._busy);
+  }
+
   connectedCallback() {
     this.innerHTML = `
       <section class="note-form-card" aria-labelledby="form-heading">
@@ -58,17 +68,17 @@ class NoteForm extends HTMLElement {
       this.titleInput,
       rules.title,
       "#title-error",
-      showErrors,
+      showErrors
     );
     const bodyValid = this.validateField(
       this.bodyInput,
       rules.body,
       "#body-error",
-      showErrors,
+      showErrors
     );
     const valid = titleValid && bodyValid;
 
-    this.submitButton.disabled = !valid;
+    this.submitButton.disabled = this.busy || !valid;
     return valid;
   }
 
@@ -96,9 +106,11 @@ class NoteForm extends HTMLElement {
           title: this.titleInput.value.trim(),
           body: this.bodyInput.value.trim(),
         },
-      }),
+      })
     );
+  }
 
+  reset() {
     this.form.reset();
     this.validate(false);
     this.titleInput.focus();
